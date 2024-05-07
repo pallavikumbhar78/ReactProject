@@ -19,27 +19,19 @@ const App = () => {
     <SafeAreaView>
       <View>
         <Image
-          style={{
-            width: 200,
-            height: 150,
-            alignSelf: 'center',
-            marginTop: 10,
-            resizeMode: 'stretch',
-          }}
+          style={style.image}
           source={{
             uri: 'https://reactnative.dev/img/tiny_logo.png',
           }}
         />
-        <Text
-          style={{marginTop: 10, fontSize: 22}}
-          Press={() => setText('Hello React')}>
+        <Text style={style.textTitle} Press={() => setText('Hello React')}>
           {text}
         </Text>
         <TextInput
           style={style.inputTextName}
           placeholder="Enter username"></TextInput>
 
-        <View style={{flexDirection: 'row'}}>
+        <View style={style.switchContainer}>
           <Text>Keep Logged In</Text>
           <Switch
             value={keepLoggedIn}
@@ -52,10 +44,6 @@ const App = () => {
             setCount(count + 1);
           }}
         />
-        {/* <Image
-          source={require('./assets/Images/loginLogo.png')}
-          style={{width: 50, height: 50}}
-        /> */}
       </View>
     </SafeAreaView>
   );
@@ -76,5 +64,19 @@ const style = StyleSheet.create({
     paddingStart: 10,
     color: 'black',
     backgroundColor: 'white',
+  },
+  image: {
+    width: 200,
+    height: 150,
+    alignSelf: 'center',
+    marginTop: 10,
+    resizeMode: 'stretch',
+  },
+  textTitle: {
+    marginTop: 10,
+    fontSize: 22,
+  },
+  switchContainer: {
+    flexDirection: 'row',
   },
 });

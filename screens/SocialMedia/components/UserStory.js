@@ -1,7 +1,9 @@
 import {View, Text, Image, StyleSheet} from 'react-native';
 import React from 'react';
-import PropTypes from 'prop-types';
-import UserProfileImage from './UserProfileImage';
+import UserProfileImage from './userProfileImage';
+import {verticalScale} from './scaling';
+import {horizonatlScale} from './scaling';
+import {scaleFontSize} from './scaling';
 
 const UserStory = props => {
   return (
@@ -15,31 +17,16 @@ const UserStory = props => {
   );
 };
 
-// UserStory.propTypes = {
-//   firstName: PropTypes.string.isRequired,
-//   profileImage: PropTypes.any.isRequired,
-// };
-
 export default UserStory;
 
 const style = StyleSheet.create({
-  image: {
-    width: 65,
-    height: 65,
-  },
   userStoryContainer: {
-    marginRight: 20,
+    marginRight: horizonatlScale(20),
   },
   firstName: {
-    fontSize: 14,
+    fontSize: scaleFontSize(14),
     color: 'black',
-    marginTop: 8,
+    marginTop: verticalScale(8),
     textAlign: 'center',
-  },
-  userImageContainer: {
-    borderColor: '#F35BAC',
-    borderWidth: 1,
-    padding: 3,
-    borderRadius: 50,
   },
 });

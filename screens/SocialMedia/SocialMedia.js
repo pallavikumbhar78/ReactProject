@@ -4,23 +4,27 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
-  Image,
   FlatList,
   Dimensions,
+  Switch,
+  Platform,
+  StatusBar,
 } from 'react-native';
 import React, {useState} from 'react';
 import Title from './components/title';
-
-import UserStory from './components/UserStory';
-
 import {
-  faEnvelope,
-  faEnvelopeCircleCheck,
-} from '@fortawesome/free-solid-svg-icons';
+  verticalScale,
+  horizonatlScale,
+  scaleFontSize,
+} from './components/scaling';
+
+import UserStory from './components/userStory';
+import {faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import UserPost from './components/UserPost';
+import UserPost from './components/userPost';
 
 const SocialMedia = () => {
+  const [isOn, setIsOn] = useState(false);
   const [screenData, setScreenData] = useState(Dimensions.get('screen'));
   console.log(screenData);
   const userStories = [
@@ -179,6 +183,7 @@ const SocialMedia = () => {
   ];
   return (
     <SafeAreaView>
+      {/* <StatusBar backgroundColor={'blue'}></StatusBar> */}
       {/* <View style={style.header}>
         <Title title={"Let's Explore"} />
         <TouchableOpacity style={style.messageIcon}>
@@ -222,6 +227,7 @@ const SocialMedia = () => {
             <>
               <View style={style.header}>
                 <Title title={"Let's Explore"} />
+
                 <TouchableOpacity style={style.messageIcon}>
                   <FontAwesomeIcon icon={faEnvelope} />
                   <View style={style.messageNumberContainer}>
@@ -229,11 +235,22 @@ const SocialMedia = () => {
                   </View>
                 </TouchableOpacity>
               </View>
+              <View style={style.switchContainer}>
+                <Switch
+                  value={isOn}
+                  style={
+                    Platform.OS === 'android' && {
+                      transform: [{scaleX: 1.5}, {scaleY: 1.5}],
+                    }
+                  }
+                  onValueChange={value => setIsOn(value)}></Switch>
+              </View>
               <View>
                 <FlatList
                   showsHorizontalScrollIndicator={false}
                   horizontal={true}
                   data={userStories}
+                  keyExtractor={item => item.id.toString()}
                   renderItem={({item}) => (
                     <UserStory
                       firstName={item.firstName}
@@ -245,6 +262,7 @@ const SocialMedia = () => {
             </>
           }
           data={userPosts}
+          keyExtractor={item => item.id.toString()}
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => (
             <View style={style.userPostContainer}>
@@ -271,9 +289,9 @@ export default SocialMedia;
 const style = StyleSheet.create({
   messageIcon: {padding: 14, borderRadius: 100, backgroundColor: '#F9FAFB'},
   header: {
-    marginLeft: 20,
-    marginRight: 10,
-    marginTop: 30,
+    marginLeft: horizonatlScale(20),
+    marginRight: horizonatlScale(10),
+    marginTop: verticalScale(30),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -292,13 +310,18 @@ const style = StyleSheet.create({
   },
   messageNumber: {
     color: '#FFFFFF',
-    fontSize: 6,
+    fontSize: scaleFontSize(6),
   },
   image: {
     width: 65,
     height: 65,
   },
   userPostContainer: {
-    marginHorizontal: 24,
+    marginHorizontal: horizonatlScale(24),
+  },
+  switchContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
 });

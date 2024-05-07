@@ -25,27 +25,19 @@ const HomeScreen = () => {
     <SafeAreaView>
       <View>
         <Image
-          style={{
-            width: 200,
-            height: 150,
-            alignSelf: 'center',
-            marginTop: 10,
-            resizeMode: 'stretch',
-          }}
+          style={style.image}
           source={{
             uri: 'https://reactnative.dev/img/tiny_logo.png',
           }}
         />
-        <Text
-          style={{marginTop: 10, fontSize: 22}}
-          onPress={() => setText('Hello React')}>
+        <Text style={style.textTitle} onPress={() => setText('Hello React')}>
           {text}
         </Text>
         <TextInput
           style={style.inputTextName}
           placeholder="Enter username"></TextInput>
 
-        <View style={{flexDirection: 'row'}}>
+        <View style={style.switchText}>
           <Text>Keep Logged In</Text>
           <Switch
             value={keepLoggedIn}
@@ -84,5 +76,19 @@ const style = StyleSheet.create({
     paddingStart: 10,
     color: 'black',
     backgroundColor: 'white',
+  },
+  image: {
+    width: 200,
+    height: 150,
+    alignSelf: 'center',
+    marginTop: 10,
+    resizeMode: 'stretch',
+  },
+  textTitle: {
+    marginTop: 10,
+    fontSize: 22,
+  },
+  switchText: {
+    flexDirection: 'row',
   },
 });

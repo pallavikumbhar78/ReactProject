@@ -4,7 +4,6 @@ import {
   TextInput,
   ScrollView,
   Switch,
-  SafeAreaView,
   Text,
   Pressable,
   Alert,
@@ -21,38 +20,30 @@ const UserInfoScreen = () => {
   };
   return (
     <ScrollView>
-      <View>
-        <TextInput
-          style={style.inputTextName}
-          placeholder="Enter Name"
-          onChangeText={text => setName(text)}></TextInput>
-        <TextInput
-          style={style.inputTextName}
-          placeholder="Enter Age"
-          onChangeText={text => setAge(text)}></TextInput>
-        <Pressable
-          style={{
-            marginTop: 20,
-            backgroundColor: 'blue',
-            padding: 20,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-          onPress={() => Alert.alert('Information Submitted!')}>
-          <Text>Submit</Text>
-        </Pressable>
-        <View style={{flexDirection: 'row', marginTop: 16}}>
-          <Text>Show Information</Text>
-          <Switch value={showInfo} onValueChange={handleToggle}></Switch>
-        </View>
-
-        {showInfo && (
-          <View style={{marginTop: 10}}>
-            <Text>Name : {name}</Text>
-            <Text>Age : {age}</Text>
-          </View>
-        )}
+      <TextInput
+        style={style.inputTextName}
+        placeholder="Enter Name"
+        onChangeText={text => setName(text)}></TextInput>
+      <TextInput
+        style={style.inputTextName}
+        placeholder="Enter Age"
+        onChangeText={text => setAge(text)}></TextInput>
+      <Pressable
+        style={style.button}
+        onPress={() => Alert.alert('Information Submitted!')}>
+        <Text>Submit</Text>
+      </Pressable>
+      <View style={style.switchContainer}>
+        <Text>Show Information</Text>
+        <Switch value={showInfo} onValueChange={handleToggle}></Switch>
       </View>
+
+      {showInfo && (
+        <View style={style.showInfoContainer}>
+          <Text>Name : {name}</Text>
+          <Text>Age : {age}</Text>
+        </View>
+      )}
     </ScrollView>
   );
 };
@@ -72,5 +63,19 @@ const style = StyleSheet.create({
     paddingStart: 10,
     color: 'black',
     backgroundColor: 'white',
+  },
+  button: {
+    marginTop: 20,
+    backgroundColor: 'blue',
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    marginTop: 16,
+  },
+  showInfoContainer: {
+    marginTop: 10,
   },
 });

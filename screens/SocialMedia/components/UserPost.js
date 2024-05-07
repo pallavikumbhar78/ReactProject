@@ -1,7 +1,7 @@
 import {View, Text, Image, StyleSheet} from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
-import UserProfileImage from './UserProfileImage';
+import UserProfileImage from './userProfileImage';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {
   faBookmark,
@@ -9,27 +9,22 @@ import {
   faMessage,
 } from '@fortawesome/free-solid-svg-icons';
 import {faHeart} from '@fortawesome/free-regular-svg-icons';
-
+import {verticalScale} from './scaling';
 const UserPost = props => {
   return (
     <View style={style.userPostContainer}>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
-        <View style={{flexDirection: 'row'}}>
+      <View style={style.postConatiner}>
+        <View style={style.postItemContainer}>
           <UserProfileImage
             profileImage={props.profileImage}
             imageDimenesions={50}
           />
-          <View style={{justifyContent: 'center', marginLeft: 10}}>
-            <Text style={{color: 'black'}}>
+          <View style={style.userNameContainer}>
+            <Text style={style.userNameText}>
               {props.firstName}
               {props.lastName}
             </Text>
-            <Text style={{color: 'black'}}>{props.location}</Text>
+            <Text style={style.userNameText}>{props.location}</Text>
           </View>
         </View>
         <FontAwesomeIcon icon={faEllipsisH} />
@@ -37,18 +32,18 @@ const UserPost = props => {
       <View style={style.postImage}>
         <Image source={props.image} />
       </View>
-      <View style={{marginLeft: 10, flexDirection: 'row'}}>
-        <View style={{flexDirection: 'row'}}>
+      <View style={style.iconContainer}>
+        <View style={style.favouriteIcon}>
           <FontAwesomeIcon icon={faHeart} />
-          <Text style={{marginLeft: 5}}>{props.likes}</Text>
+          <Text style={style.iconName}>{props.likes}</Text>
         </View>
-        <View style={{flexDirection: 'row', marginLeft: 27}}>
+        <View style={style.messageIcon}>
           <FontAwesomeIcon icon={faMessage} />
-          <Text style={{marginLeft: 5}}>{props.comments}</Text>
+          <Text style={style.iconName}>{props.comments}</Text>
         </View>
-        <View style={{flexDirection: 'row', marginLeft: 27}}>
+        <View style={style.messageIcon}>
           <FontAwesomeIcon icon={faBookmark} />
-          <Text style={{marginLeft: 5}}>{props.bookmarks}</Text>
+          <Text style={style.iconName}>{props.bookmarks}</Text>
         </View>
       </View>
     </View>
@@ -71,12 +66,41 @@ export default UserPost;
 const style = StyleSheet.create({
   postImage: {
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: verticalScale(20),
+  },
+  postConatiner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  postItemContainer: {
+    flexDirection: 'row',
+  },
+  userNameContainer: {
+    justifyContent: 'center',
+    marginLeft: 10,
+  },
+  userNameText: {
+    color: 'black',
   },
   userPostContainer: {
-    marginTop: 35,
+    marginTop: verticalScale(35),
     paddingBottom: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#EFF2F6',
+  },
+  iconContainer: {
+    marginLeft: 10,
+    flexDirection: 'row',
+  },
+  favouriteIcon: {
+    flexDirection: 'row',
+  },
+  iconName: {
+    marginLeft: 5,
+  },
+  messageIcon: {
+    flexDirection: 'row',
+    marginLeft: 27,
   },
 });
