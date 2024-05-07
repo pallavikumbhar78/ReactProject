@@ -52,10 +52,10 @@ const App = () => {
             setCount(count + 1);
           }}
         />
-        <Image
+        {/* <Image
           source={require('./assets/Images/loginLogo.png')}
           style={{width: 50, height: 50}}
-        />
+        /> */}
       </View>
     </SafeAreaView>
   );
